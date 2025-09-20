@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="grid" style="max-width:480px;margin:auto">
+    <div class="card">
+      <h2>Create Account</h2>
+      <form (submit)="register(username.value, email.value, password.value); $event.preventDefault()">
+        <input class="input" #username placeholder="username (unique)" style="width:100%;margin-top:8px">
+        <input class="input" #email type="email" placeholder="email" style="width:100%;margin-top:8px">
+        <input class="input" #password type="password" placeholder="password (Phase-1 demo)" style="width:100%;margin-top:8px">
+        <button class="btn btn-primary" style="width:100%;margin-top:12px">Sign up</button>
+      </form>
+      <p *ngIf="error" style="color:#fda4af;margin-top:8px">{{error}}</p>
+      <p style="color:var(--muted);margin-top:8px">Have an account? <a routerLink="/login">Log in</a></p>
+    </div>
+  </div>
+</div>
