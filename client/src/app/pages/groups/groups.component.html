@@ -1,0 +1,20 @@
+<div class="container grid grid-2">
+  <div class="card">
+    <div class="badge">Groups</div>
+    <form (submit)="addGroup(newName); $event.preventDefault()" style="margin-top:10px">
+      <input class="input" #newName placeholder="New group name">
+      <button class="btn btn-primary" style="margin-left:8px">Add</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3>My Groups</h3>
+    <ul>
+      <li *ngFor="let g of groups" style="display:flex;align-items:center;gap:10px;justify-content:space-between">
+        <a [routerLink]="['/channels', g.id]">{{g.name}}</a>
+        <button class="btn" (click)="removeGroup(g.id)">Remove</button>
+      </li>
+    </ul>
+    <p *ngIf="!groups.length" style="color:var(--muted)">No groups yet.</p>
+  </div>
+</div>
