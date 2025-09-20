@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="card">
+    <div class="badge">Super Admin</div>
+    <p *ngIf="!isSuper()" style="color:var(--muted)">Login as <span class="badge">super</span> to use this page.</p>
+    <form (submit)="createGroup(newG); $event.preventDefault()" *ngIf="isSuper()" style="margin-top:10px">
+      <input class="input" #newG placeholder="Create group (super)">
+      <button class="btn btn-primary" style="margin-left:8px">Create</button>
+    </form>
+  </div>
+
+  <div class="grid" style="margin-top:16px">
+    <div class="card">
+      <h3>Users</h3>
+      <ul>
+        <li *ngFor="let u of users" style="margin-bottom:10px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div>
+              <strong>{{u.username}}</strong>
+              <span class="badge" *ngFor="let r of u.roles" style="margin-left:6px">{{r}}</span>
+              <div style="color:var(--muted);font-size:12px">Groups: {{u.groups.join(', ') || 'none'}}</div>
+            </div>
+            <div>
+              <button class="btn" (click)="promoteToGroup(u.id)">Promote to Group</button>
+              <button class="btn" (click)="demoteFromGroup(u.id)">Demote Group</button>
+              <button class="btn" (click)="promoteToSuper(u.id)">Promote to Super</button>
+              <button class="btn" (click)="deleteUser(u.id)">Delete User</button>
+            </div>
+          </div>
+          <div style="margin-top:6px">
+            <form (submit)="assignToGroup(u.id, gid); $event.preventDefault()" *ngIf="isSuper()" style="display:inline-flex;gap:8px">
+              <select class="input" #gid>
+                <option *ngFor="let g of groups" [value]="g.id">{{g.name}}</option>
+              </select>
+              <button class="btn">Assign to Group</button>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Groups</h3>
+      <ul>
+        <li *ngFor="let g of groups">
+          <a [routerLink]="['/channels', g.id]">{{g.name}}</a>
+        </li>
+      </ul>
+      <p *ngIf="!groups.length" style="color:var(--muted)">No groups yet.</p>
+    </div>
+  </div>
+</div>
