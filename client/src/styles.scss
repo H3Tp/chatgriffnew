@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+:root { --bg:#0f172a; --card:#111827; --muted:#9ca3af; --accent:#22d3ee; }
+*{box-sizing:border-box} html,body{height:100%}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#0b1020,#0a0f1a);color:#e5e7eb}
+.container{max-width:1200px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid #1f2937;border-radius:14px;padding:16px}
+.input,.btn{border-radius:10px;border:1px solid #334155;padding:10px 12px;background:#0b1220;color:#e5e7eb}
+.input:focus{outline:2px solid var(--accent)} .btn{cursor:pointer}
+.btn-primary{background:var(--accent);color:#041016;border:none}
+.grid{display:grid;gap:16px} .grid-2{grid-template-columns:260px 1fr}
+.badge{display:inline-block;padding:2px 8px;background:#1f2937;border-radius:999px;color:#93c5fd;font-size:12px}
+a{color:#93c5fd;text-decoration:none} a:hover{text-decoration:underline}
