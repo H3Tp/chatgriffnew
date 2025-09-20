@@ -1,0 +1,26 @@
+<div class="container grid grid-2">
+  <div class="card">
+    <div class="badge">Channels</div>
+    <div *ngIf="group; else notfound">
+      <h3>{{group.name}}</h3>
+      <form (submit)="addChannel(newName); $event.preventDefault()" *ngIf="canManage()" style="margin-top:10px">
+        <input class="input" #newName placeholder="New channel name">
+        <button class="btn btn-primary" style="margin-left:8px">Add</button>
+      </form>
+      <p *ngIf="!canManage()" style="color:var(--muted)">You can view channels. Admins can add/remove.</p>
+    </div>
+    <ng-template #notfound><p>Group not found.</p></ng-template>
+  </div>
+
+  <div class="card">
+    <h3>Channel List</h3>
+    <ul>
+      <li *ngFor="let c of channels" style="display:flex;align-items:center;gap:10px;justify-content:space-between">
+        <span># {{c.name}}</span>
+        <button class="btn" *ngIf="canManage()" (click)="removeChannel(c.id)">Remove</button>
+      </li>
+    </ul>
+    <p *ngIf="!channels.length" style="color:var(--muted)">No channels yet.</p>
+    <p style="margin-top:10px"><a routerLink="/groups">← Back to groups</a></p>
+  </div>
+</div>
