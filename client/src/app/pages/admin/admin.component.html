@@ -1,0 +1,30 @@
+<div class="container grid grid-2">
+  <div class="card">
+    <div class="badge">Group Admin</div>
+    <p *ngIf="!canUse()" style="color:var(--muted)">Login as a group or super admin to manage groups.</p>
+
+    <form (submit)="createGroup(newGroup); $event.preventDefault()" *ngIf="canUse()" style="margin-top:10px">
+      <input class="input" #newGroup placeholder="Create new group">
+      <button class="btn btn-primary" style="margin-left:8px">Create</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3>My Admin Groups</h3>
+    <ul>
+      <li *ngFor="let g of myGroups" style="margin-bottom:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <a [routerLink]="['/channels', g.id]">{{g.name}}</a>
+          <div>
+            <form (submit)="addChannel(g.id, chName); $event.preventDefault()" style="display:inline-flex;gap:8px;vertical-align:middle">
+              <input class="input" #chName placeholder="new channel">
+              <button class="btn">Add</button>
+            </form>
+            <button class="btn" style="margin-left:8px" (click)="removeGroup(g.id)">Remove Group</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <p *ngIf="!myGroups.length" style="color:var(--muted)">You don't administer any groups yet.</p>
+  </div>
+</div>
